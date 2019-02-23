@@ -1,5 +1,6 @@
 package model;
 
+import customExceptions.EnrolledTimeLimitException;
 import customExceptions.OutOfRangeGradeException;
 import customExceptions.QuotaEnrollExceedException;
 
@@ -22,12 +23,15 @@ public class Course {
 		studentsEnrolled = new Student[mq];
 	}
 	
-	public void enroll(String id) throws QuotaEnrollExceedException{
+	public void enroll(String id) throws QuotaEnrollExceedException, EnrolledTimeLimitException{
 		int posNewStudent = searchFirstAvailable();
 		
 		if(posNewStudent==-1) {
 			throw new QuotaEnrollExceedException(maxQuota);
-		}else {
+		}else if (2<currentWeek) {
+			throw new EnrolledTimeLimitException(currentWeek);
+		}
+		else {
 			studentsEnrolled[posNewStudent] = new Student(id, totalGradesAmount);
 		}
 	}
@@ -77,3 +81,5 @@ public class Course {
 		return pos;
 	}
 }
+
+

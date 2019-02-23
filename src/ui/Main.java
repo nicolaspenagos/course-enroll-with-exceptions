@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import customExceptions.EnrolledTimeLimitException;
 import customExceptions.QuotaEnrollExceedException;
 import model.Course;
 
@@ -49,6 +50,9 @@ public class Main {
 					} catch (QuotaEnrollExceedException e) {
 						System.out.println("It was no possible to enroll the student with id "+id);
 						System.out.println(e.getMessage());
+					} catch (EnrolledTimeLimitException e) {
+						System.out.print(e.getMessage());
+						//e.printStackTrace();
 					}
 				break;
 				case 2:
@@ -69,6 +73,7 @@ public class Main {
 					System.out.println("Student has been graded");
 				break;
 				case 4:
+					myCourse.advanceWeek();
 					System.out.print("The current week has advanced");
 				break;
 				case 5:

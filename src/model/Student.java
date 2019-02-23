@@ -9,6 +9,7 @@ public class Student {
 	}
 	
 	public void setGrade(int gradeNumber, double grade) throws ArrayIndexOutOfBoundsException{		
+		
 		grades[gradeNumber] = grade;
 	}
 	
